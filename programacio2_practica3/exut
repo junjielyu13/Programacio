@@ -1,0 +1,55 @@
+[33mcommit cd424379b30a6567138fb1e2e3b230b53f6efa68[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: YLinZH <79147435+YLinZH@users.noreply.github.com>
+Date:   Thu Apr 22 10:49:28 2021 +0200
+
+    Add files via upload
+
+[1mdiff --git a/LinZhihanLiJunjie_L3/src/linzhihanlijunjie_l3/model/Dades.java b/LinZhihanLiJunjie_L3/src/linzhihanlijunjie_l3/model/Dades.java[m
+[1mindex 5d504f0..e1a0cc8 100644[m
+[1m--- a/LinZhihanLiJunjie_L3/src/linzhihanlijunjie_l3/model/Dades.java[m
+[1m+++ b/LinZhihanLiJunjie_L3/src/linzhihanlijunjie_l3/model/Dades.java[m
+[36m@@ -20,9 +20,15 @@[m [mimport linzhihanlijunjie_l3.vista.MercatException;[m
+ public class Dades implements InDades, Serializable {[m
+     private static final long serialVersionUID = 1L;[m
+ [m
+[31m-    LlistaArticles llistaArticles = new LlistaArticles();[m
+[31m-    LlistaClients llistaClients = new LlistaClients();[m
+[31m-    LlistaComandes llistaComandes = new LlistaComandes();[m
+[32m+[m[32m    LlistaArticles llistaArticles;[m[41m[m
+[32m+[m[32m    LlistaClients llistaClients;[m[41m[m
+[32m+[m[32m    LlistaComandes llistaComandes;[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    public Dades() {[m[41m[m
+[32m+[m[32m        llistaArticles = new LlistaArticles();[m[41m[m
+[32m+[m[32m        llistaClients = new LlistaClients();[m[41m[m
+[32m+[m[32m        llistaComandes = new LlistaComandes();[m[41m[m
+[32m+[m[32m    }[m[41m[m
+ [m
+     @Override[m
+     public void afegirArticle(String id, String nom, float preu, int temps, boolean admetUrgent) throws MercatException {[m
+[36m@@ -66,10 +72,10 @@[m [mpublic class Dades implements InDades, Serializable {[m
+     @Override[m
+     public void afegirComanda(int articlePos, int clientPos, int quantitat, boolean esUrgent) throws MercatException {[m
+         if(esUrgent){[m
+[31m-            Comanda comanda = new ComandaUrgent(articlePos, clientPos, quantitat);[m
+[32m+[m[32m            Comanda comanda = new ComandaUrgent(llistaArticles.getAt(articlePos), llistaClients.getAt(clientPos), quantitat);[m[41m[m
+             llistaComandes.afegir(comanda);[m
+         }else{[m
+[31m-            Comanda comanda = new ComandaNormal(articlePos, clientPos, quantitat);[m
+[32m+[m[32m            Comanda comanda = new ComandaNormal(llistaArticles.getAt(articlePos),llistaClients.getAt(clientPos), quantitat);[m[41m[m
+             llistaComandes.afegir(comanda);[m
+         }[m
+         [m
+[1mdiff --git a/LinZhihanLiJunjie_L3/src/linzhihanlijunjie_l3/vista/MercatUB.java b/LinZhihanLiJunjie_L3/src/linzhihanlijunjie_l3/vista/MercatUB.java[m
+[1mindex bc8c73f..6a43c5d 100644[m
+[1m--- a/LinZhihanLiJunjie_L3/src/linzhihanlijunjie_l3/vista/MercatUB.java[m
+[1m+++ b/LinZhihanLiJunjie_L3/src/linzhihanlijunjie_l3/vista/MercatUB.java[m
+[36m@@ -139,7 +139,7 @@[m [mpublic class MercatUB {[m
+      *     sol·liciten i determinar si la comanda és urgent o no.[m
+      */[m
+     private void AfegirComanda(){[m
+[31m-[m
+[32m+[m[32m        System.out.println();[m
+     }[m
+ [m
+     /**[m
